@@ -8,6 +8,7 @@
 
 import UIKit
 import EventKit
+import SwiftDate
 
 class ViewController: UIViewController, MainViewDelegate {
 	
@@ -26,6 +27,7 @@ class ViewController: UIViewController, MainViewDelegate {
 	override func didReceiveMemoryWarning() {
 		super.didReceiveMemoryWarning()
 		// Dispose of any resources that can be recreated.
+		self.view = nil
 	}
 	
 	// MARK: - Private
@@ -42,6 +44,48 @@ class ViewController: UIViewController, MainViewDelegate {
 	private func addEvent() {
 		let startDate = Date()
 		let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		let endDate = cal.date(byAdding: .hour, value: 2, to: startDate)
 		let title = "テストイベント"
 		let defaultCalendar = eventStore.defaultCalendarForNewEvents
@@ -56,12 +100,19 @@ class ViewController: UIViewController, MainViewDelegate {
 			try eventStore.save(event, span: .thisEvent)
 		} catch let error {
 			print(error)
+			print("セーブ失敗したよ")
+			return
 		}
+		print("セーブできたよ")
 	}
 	
 	// MARK: - MainViewDelegate
 	
-	func mainView(_ mainView: MainView, didTapped button: UIButton) {
+	func mainView(_ mainView: MainView, transitionButton: UIButton) {
+		print("タップ")
+	}
+	
+	func mainView(_ mainView: MainView, button: UIButton) {
 		guard self.isAuthed() else {
 			eventStore.requestAccess(to: .event, completion: {[weak self] granted, e in
 				if granted {

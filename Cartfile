@@ -1,1 +1,2 @@
 github "malcommac/SwiftDate" == 4.5.0
+github "Alamofire/Alamofire" == 4.7.1

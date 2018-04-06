@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37F65836207766D70080A78A /* MatchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37F65835207766D70080A78A /* MatchListViewController.swift */; };
+		37F65838207766F90080A78A /* MatchListViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 37F65837207766F90080A78A /* MatchListViewController.storyboard */; };
+		37F6583D207772800080A78A /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F6583B2077727F0080A78A /* Alamofire.framework */; };
+		37F6583E207772800080A78A /* SwiftDate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37F6583C207772800080A78A /* SwiftDate.framework */; };
 		37FCA887207499B50095CC8A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FCA886207499B50095CC8A /* AppDelegate.swift */; };
 		37FCA889207499B50095CC8A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37FCA888207499B50095CC8A /* ViewController.swift */; };
 		37FCA88E207499B50095CC8A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 37FCA88D207499B50095CC8A /* Assets.xcassets */; };
@@ -34,6 +38,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		37F65835207766D70080A78A /* MatchListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchListViewController.swift; sourceTree = "<group>"; };
+		37F65837207766F90080A78A /* MatchListViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MatchListViewController.storyboard; sourceTree = "<group>"; };
+		37F6583B2077727F0080A78A /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
+		37F6583C207772800080A78A /* SwiftDate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftDate.framework; path = Carthage/Build/iOS/SwiftDate.framework; sourceTree = "<group>"; };
 		37FCA883207499B50095CC8A /* addCalendarApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = addCalendarApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37FCA886207499B50095CC8A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		37FCA888207499B50095CC8A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -54,6 +62,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F6583D207772800080A78A /* Alamofire.framework in Frameworks */,
+				37F6583E207772800080A78A /* SwiftDate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +84,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37F65839207766FE0080A78A /* MatchList */ = {
+			isa = PBXGroup;
+			children = (
+				37F65835207766D70080A78A /* MatchListViewController.swift */,
+				37F65837207766F90080A78A /* MatchListViewController.storyboard */,
+			);
+			path = MatchList;
+			sourceTree = "<group>";
+		};
+		37F6583A2077727F0080A78A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37F6583B2077727F0080A78A /* Alamofire.framework */,
+				37F6583C207772800080A78A /* SwiftDate.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		37FCA87A207499B50095CC8A = {
 			isa = PBXGroup;
 			children = (
@@ -81,6 +109,7 @@
 				37FCA89A207499B50095CC8A /* addCalendarAppTests */,
 				37FCA8A5207499B50095CC8A /* addCalendarAppUITests */,
 				37FCA884207499B50095CC8A /* Products */,
+				37F6583A2077727F0080A78A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,6 +132,7 @@
 				37FCA88D207499B50095CC8A /* Assets.xcassets */,
 				37FCA88F207499B50095CC8A /* LaunchScreen.storyboard */,
 				37FCA892207499B50095CC8A /* Info.plist */,
+				37F65839207766FE0080A78A /* MatchList */,
 			);
 			path = addCalendarApp;
 			sourceTree = "<group>";
@@ -135,6 +165,7 @@
 				37FCA87F207499B50095CC8A /* Sources */,
 				37FCA880207499B50095CC8A /* Frameworks */,
 				37FCA881207499B50095CC8A /* Resources */,
+				37F6583F207772A20080A78A /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -234,6 +265,7 @@
 			files = (
 				37FCA891207499B50095CC8A /* LaunchScreen.storyboard in Resources */,
 				37FCA88E207499B50095CC8A /* Assets.xcassets in Resources */,
+				37F65838207766F90080A78A /* MatchListViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,11 +285,30 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		37F6583F207772A20080A78A /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftDate.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		37FCA87F207499B50095CC8A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37F65836207766D70080A78A /* MatchListViewController.swift in Sources */,
 				37FCA889207499B50095CC8A /* ViewController.swift in Sources */,
 				37FCA8B72074B5A10095CC8A /* MainView.swift in Sources */,
 				37FCA887207499B50095CC8A /* AppDelegate.swift in Sources */,
@@ -420,7 +471,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MUCG9T2HC3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = addCalendarApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = test.addCalendarApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -435,7 +491,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = MUCG9T2HC3;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = addCalendarApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = test.addCalendarApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

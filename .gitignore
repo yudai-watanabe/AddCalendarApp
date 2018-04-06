@@ -1,3 +1,4 @@
 Cartfile.resolved
 *.xcuserstate
 *.xcbkptlist
+Carthage/*
