@@ -10,7 +10,7 @@ import UIKit
 import EventKit
 import SwiftDate
 
-class ViewController: UIViewController, MainViewDelegate {
+class ViewController: UIViewController, MainViewDelegate, MatchListViewControllerDelegate {
 	
 	private let eventStore = EKEventStore()
 	
@@ -44,48 +44,6 @@ class ViewController: UIViewController, MainViewDelegate {
 	private func addEvent() {
 		let startDate = Date()
 		let cal = Calendar(identifier: Calendar.Identifier.gregorian)
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		let endDate = cal.date(byAdding: .hour, value: 2, to: startDate)
 		let title = "テストイベント"
 		let defaultCalendar = eventStore.defaultCalendarForNewEvents
@@ -109,7 +67,11 @@ class ViewController: UIViewController, MainViewDelegate {
 	// MARK: - MainViewDelegate
 	
 	func mainView(_ mainView: MainView, transitionButton: UIButton) {
-		print("タップ")
+		let matchListVC = MatchListViewController.instantiateFromStoryboard() as! MatchListViewController
+		matchListVC.delegate = self
+		self.present(matchListVC, animated: true, completion: {
+			print("present完了")
+		})
 	}
 	
 	func mainView(_ mainView: MainView, button: UIButton) {
@@ -125,5 +87,14 @@ class ViewController: UIViewController, MainViewDelegate {
 		}
 		self.addEvent()
 	}
+	
+	//	MARK: - MatchListViewControllerDelegate
+	
+	func matchListViewController(_ vc: MatchListViewController, backButton didTapped: UIButton) {
+		vc.dismiss(animated: true, completion: {
+			print("dismiss完了")
+		})
+	}
+	
 }
 
