@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import Foundation
+import SwiftDate
 
 protocol MatchListViewControllerDelegate: NSObjectProtocol {
 	func matchListViewController(_ vc: MatchListViewController, backButton didTapped: UIButton)
@@ -18,12 +20,19 @@ class MatchListViewController: UIViewController {
 	@IBOutlet weak var backButton: UIButton!
 	@IBOutlet weak var date: UILabel!
 	@IBOutlet weak var matchTableView: UITableView!
-	private var tableView: UITableView!
 	
+  private var tableView: UITableView!
+  private let matchTableViewCell = MatchTableViewCell()
+  
 	private var year: Year? {
 		didSet{
-			print("受信完了")
-			self.date.text = year?.sec[0].match[0].date
+          if  let date: Array = year?.sec[0].match[0].date.components(separatedBy: "/") {
+            let month: String = date[0]
+            let day: String = date[1]
+            let stringDate: String = year!.year + "-" + month + "-" + day + " " + year!.sec[0].match[0].kickofftime
+            let startDate = stringDate.date(format: .custom("yyyy-MM-dd HH:MM"))
+            self.date.text = String(describing: startDate?.day)
+          }
 			setTableView()
 		}
 	}
@@ -36,12 +45,9 @@ class MatchListViewController: UIViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
-
-		// TODO: 毎節ごとに表示させる
 		self.backButton.addTarget(self, action: #selector(back), for: .touchUpInside)
 		
-		getMatchs("http://labs.s-koichi.info/api/jleague/V2/schedule",
-				  params: ["year":"2018", "league": "j1"])
+		getMatchs()
     }
 
     override func didReceiveMemoryWarning() {
@@ -56,16 +62,19 @@ class MatchListViewController: UIViewController {
 	private func setTableView() {
 		matchTableView.delegate = self
 		matchTableView.dataSource = self
-		matchTableView.register(UINib(nibName: "MatchTableViewCell", bundle: nil), forCellReuseIdentifier: "MatchTableViewCell")
+		matchTableView.register(UINib(nibName: matchTableViewCell.Identifier, bundle: nil),
+                                forCellReuseIdentifier: matchTableViewCell.Identifier)
 		matchTableView.tableFooterView = UIView(frame: .zero)
 		view.addSubview(matchTableView)
 	}
 	
-	private func getMatchs(_ url: String, params: [String:String]) {
-		Alamofire.request(url, parameters: params).responseJSON(completionHandler: {[weak self]res in
-			guard case .success(_) = res.result,
-				let data = res.data,
-				let matchs = try? JSONDecoder().decode(Year.self, from: data) else {
+	private func getMatchs() {
+      let url = "http://labs.s-koichi.info/api/jleague/V2/schedule"
+      let params =  ["year":"2018", "league": "j1"]
+      
+		Alamofire.request(url, parameters: params).responseJSON(completionHandler: {[weak self] responce in
+			guard case .success(_) = responce.result, let data = responce.data,
+              let matchs = try? JSONDecoder().decode(Year.self, from: data) else {
 				return
 			}
 			self?.year = matchs
@@ -92,15 +101,17 @@ extension MatchListViewController: UITableViewDataSource {
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "MatchTableViewCell", for: indexPath) as! MatchTableViewCell
+		let cell = tableView.dequeueReusableCell(withIdentifier: matchTableViewCell.Identifier,
+                                                 for: indexPath) as! MatchTableViewCell
 		let section = indexPath.section
 		let row = indexPath.row
 		let match = year!.sec[section].match[row]
-		
+        let nullScore = "0-0"
+      
 		cell.date.text = match.date
 		cell.time.text = match.kickofftime
 		cell.home.text = match.home
-		cell.score.text = match.score ?? "0-0"
+		cell.score.text = match.score ?? nullScore
 		cell.away.text = match.away
 		cell.venue.text = match.place
 		return cell

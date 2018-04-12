@@ -10,6 +10,8 @@ import UIKit
 
 class MatchTableViewCell: UITableViewCell {
 
+  open let Identifier: String = "MatchTableViewCell"
+  
 	@IBOutlet weak var date: UILabel!
 	@IBOutlet weak var time: UILabel!
 	@IBOutlet weak var home: UILabel!
