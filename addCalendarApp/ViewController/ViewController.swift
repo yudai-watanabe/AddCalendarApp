@@ -43,7 +43,7 @@ class ViewController: UIViewController, MainViewDelegate, MatchListViewControlle
 	
 	private func addEvent() {
 		let startDate = Date()
-		let cal = Calendar(identifier: Calendar.Identifier.gregorian)
+		let cal = Calendar(identifier: .gregorian)
 		let endDate = cal.date(byAdding: .hour, value: 2, to: startDate)
 		let title = "テストイベント"
 		let defaultCalendar = eventStore.defaultCalendarForNewEvents

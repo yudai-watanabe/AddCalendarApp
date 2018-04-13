@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Year: Codable {
+struct Fixture: Codable {
 	let year: String
 	let league: String
 	let count: Int

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import Foundation
 import SwiftDate
+import EventKit
 
 protocol MatchListViewControllerDelegate: NSObjectProtocol {
 	func matchListViewController(_ vc: MatchListViewController, backButton didTapped: UIButton)
@@ -24,15 +25,8 @@ class MatchListViewController: UIViewController {
   private var tableView: UITableView!
   private let matchTableViewCell = MatchTableViewCell()
   
-	private var year: Year? {
+	private var fixture: Fixture? {
 		didSet{
-          if  let date: Array = year?.sec[0].match[0].date.components(separatedBy: "/") {
-            let month: String = date[0]
-            let day: String = date[1]
-            let stringDate: String = year!.year + "-" + month + "-" + day + " " + year!.sec[0].match[0].kickofftime
-            let startDate = stringDate.date(format: .custom("yyyy-MM-dd HH:MM"))
-            self.date.text = String(describing: startDate?.day)
-          }
 			setTableView()
 		}
 	}
@@ -74,11 +68,47 @@ class MatchListViewController: UIViewController {
       
 		Alamofire.request(url, parameters: params).responseJSON(completionHandler: {[weak self] responce in
 			guard case .success(_) = responce.result, let data = responce.data,
-              let matchs = try? JSONDecoder().decode(Year.self, from: data) else {
+              let fixtures = try? JSONDecoder().decode(Fixture.self, from: data) else {
 				return
 			}
-			self?.year = matchs
+			self?.fixture = fixtures
 		})
+	}
+	
+	private func getDate(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int) -> DateInRegion? {
+		var cmp = DateComponents()
+		cmp.year = year
+		cmp.month = month
+		cmp.day = day
+		cmp.hour = hour
+		cmp.minute = minute
+		return DateInRegion(components: cmp)
+	}
+	
+	private func setEventWithMatch(_ match: Match, start: Date, end: Date) {
+		let eventStore = EKEventStore()
+		let event = EKEvent(eventStore: eventStore)
+		event.title = match.home + " vs " + match.away
+		event.startDate = start
+		event.endDate = end
+		event.location = match.place
+
+		let alert = UIAlertController(title: "確認", message: "このイベントを登録しますか？\n" + event.title, preferredStyle: .alert)
+		let okAction: UIAlertAction = UIAlertAction(title: "OK",
+													style: .default, handler: {_ in
+														let manager = EventKitManager(event, eventStore)
+														manager.set(complation: {bool in
+															guard bool else {
+																return
+															}
+															print("セーブできたよ")
+														})
+		})
+		let falseAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+		alert.addAction(okAction)
+		alert.addAction(falseAction)
+		
+		self.present(alert, animated: true, completion: nil)		
 	}
 	
 	@objc func back(sender: UIButton) {
@@ -89,15 +119,15 @@ class MatchListViewController: UIViewController {
 extension MatchListViewController: UITableViewDataSource {
 	
 	func numberOfSections(in tableView: UITableView) -> Int {
-		return year!.sec.count
+		return fixture!.sec.count
 	}
 	
 	func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?  {
-		return year!.sec[section].sec
+		return fixture!.sec[section].sec
 	}
 	
 	func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return year!.sec[section].match.count
+		return fixture!.sec[section].match.count
 	}
 	
 	func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -105,7 +135,7 @@ extension MatchListViewController: UITableViewDataSource {
                                                  for: indexPath) as! MatchTableViewCell
 		let section = indexPath.section
 		let row = indexPath.row
-		let match = year!.sec[section].match[row]
+		let match = fixture!.sec[section].match[row]
         let nullScore = "0-0"
       
 		cell.date.text = match.date
@@ -126,7 +156,22 @@ extension MatchListViewController: UITableViewDelegate {
 	}
 	
 	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		print(indexPath)
+		guard  let match = fixture?.sec[indexPath.section].match[indexPath.row],
+			let year: Int = Int((fixture?.year)!) else {
+			return
+		}
+		let date: Array = match.date.components(separatedBy: "/")
+		let time: Array = match.kickofftime.components(separatedBy: ":")
+		
+		if let month: Int = Int(date[0]),
+			let day: Int = Int(date[1]),
+			let hour: Int = Int(time[0]),
+			let minute: Int = Int(time[1]),
+			let startDate = getDate(year, month, day, hour, minute) {
+			
+			let endDate = startDate + 2.hours
+			self.setEventWithMatch(match, start: startDate.absoluteDate, end: endDate.absoluteDate)
+		}
 	}
 	
 }
