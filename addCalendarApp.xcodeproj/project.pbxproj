@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3735600920844544000DB067 /* ToastSwiftFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3735600820844544000DB067 /* ToastSwiftFramework.framework */; };
 		379F27C0207C9CBE00E09E14 /* Year.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F27BF207C9CBE00E09E14 /* Year.swift */; };
 		379F27C2207C9CD500E09E14 /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F27C1207C9CD500E09E14 /* Section.swift */; };
 		379F27C4207C9CEC00E09E14 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379F27C3207C9CEC00E09E14 /* Match.swift */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3735600820844544000DB067 /* ToastSwiftFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ToastSwiftFramework.framework; path = Carthage/Build/iOS/ToastSwiftFramework.framework; sourceTree = "<group>"; };
 		379F27BF207C9CBE00E09E14 /* Year.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Year.swift; sourceTree = "<group>"; };
 		379F27C1207C9CD500E09E14 /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		379F27C3207C9CEC00E09E14 /* Match.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
@@ -76,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3735600920844544000DB067 /* ToastSwiftFramework.framework in Frameworks */,
 				37F6583D207772800080A78A /* Alamofire.framework in Frameworks */,
 				37F6583E207772800080A78A /* SwiftDate.framework in Frameworks */,
 			);
@@ -155,6 +158,7 @@
 		37F6583A2077727F0080A78A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3735600820844544000DB067 /* ToastSwiftFramework.framework */,
 				37F6583B2077727F0080A78A /* Alamofire.framework */,
 				37F6583C207772800080A78A /* SwiftDate.framework */,
 			);
@@ -364,6 +368,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftDate.framework",
+				"$(SRCROOT)/CArthage/Build/iOS/ToastSwiftFramework.framework",
 			);
 			outputPaths = (
 			);
@@ -545,9 +550,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 86YAB7ZF6J;
+				DEVELOPMENT_TEAM = E7W8568MTU;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -557,8 +562,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = test.addCalendarApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f84d17c1-2a8e-4452-ac5c-aedfeea5b143";
-				PROVISIONING_PROFILE_SPECIFIER = "Wildcard Development";
+				PROVISIONING_PROFILE = "b4036133-3c46-405f-a1e8-97d57666ce31";
+				PROVISIONING_PROFILE_SPECIFIER = "DMM Enterprise Apps";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
